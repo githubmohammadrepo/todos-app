@@ -85,9 +85,7 @@
                 </div>
 
                 <div class="links">
-                    <a href="{{ route('home') }}">Home</a>
-                    <a href="{{ route('about') }}">About</a>
-                    <a href="{{ route('users') }}">users</a>
+      
                     <a href="https://blog.laravel.com">Blog</a>
                     <a href="https://nova.laravel.com">Nova</a>
                     <a href="https://forge.laravel.com">Forge</a>

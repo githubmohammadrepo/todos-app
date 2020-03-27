@@ -11,8 +11,9 @@
 |
 */
 
-Route::get('/', 'HomeController@index')->name('home');
-
-Route::get('about', 'TodoController@index')->name('about');
+Route::get('/', 'TodoController@index')->name('allTodos');
+Route::get('daysTodo', 'TodoController@showDays')->name('daysTodos');
+Route::get('date/{todo}', 'TodoController@day')->name('day');
+Route::get('todo/{todo}', 'TodoController@show')->name('todo');
 
 Route::get('users', 'UsersController@index');
