@@ -91,7 +91,7 @@ class TodoController extends Controller
      */
     public function create()
     {
-        //
+        return view('todos\newTodo');
     }
 
     /**
@@ -102,7 +102,26 @@ class TodoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate(request(),[
+            'title'=>'required|min:5|max:40',
+            'description'=>'required|min:12|max:120',
+            'created_at'=>'required'
+        ]);
+
+        $todo = Todo::create([
+            'title' =>$request->title,
+            'description'=>$request->description,
+            'is_complete'=>0,
+            'created_at'=>$request->created_at,
+            'updated_at'=>$request->created_at,
+        ]);
+        if($todo->title==$request->title){
+            session()->flash('success','your todo was successfully created');
+            return redirect('/');
+        }else{
+            session()->flash('danger','your todo does not created');
+            return redirect('todo/create');
+        }
     }
 
     /**
@@ -122,11 +141,55 @@ class TodoController extends Controller
      * @param  \App\Todo  $todo
      * @return \Illuminate\Http\Response
      */
-    public function edit(Todo $todo)
+    public function edit(Request $request)
     {
-        //
-    }
+        $this->validate(request(),[
+            'title' => 'required|min:5|max:50',
+            'description' => 'required|min:15|max:130'
+        ]);
+        $todo = Todo::find($request->id);
+            $todo->title = $request->title;
+            $todo->description = $request->description;
+            $todo->updated_at = now();
+        $result =($todo->save());
 
+        if($result){
+            session()->flash('success','your todo was successfully edited');
+            return redirect(route('day', explode(' ', (String)$todo->created_at)[0]));
+        }else{
+            session()->flash('danger','your todo does not edited');
+            return redirect(route('day',explode(' ', (String)$todo->created_at)[0]));
+        }
+
+    }
+/**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Todo  $todo
+     * @return \Illuminate\Http\Response
+     */
+    public function complete(Todo $todo)
+    {
+        $todo->is_complete =1;
+        $result =$todo->save();
+        if($result){
+            session()->flash('success','your todo was successfully completed');
+            return redirect(route('day', explode(' ', (String)$todo->created_at)[0]));
+        }else{
+            session()->flash('danger','your todo does not completed');
+            return redirect(route('day',explode(' ', (String)$todo->created_at)[0]));
+        }
+    }
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Todo  $todo
+     * @return \Illuminate\Http\Response
+     */
+    public function showEdit(Todo $todo)
+    {
+        return view('todos\edit')->with('todo',$todo);
+    }
     /**
      * Update the specified resource in storage.
      *
@@ -147,6 +210,12 @@ class TodoController extends Controller
      */
     public function destroy(Todo $todo)
     {
-        //
+        if($todo->delete()){
+            session()->flash('success','your todo was successfully deleted');
+            return redirect('/');
+        }else{
+            session()->flash('danger','your todo does not deleted');
+            return redirect('todo-delete');
+        }
     }
 }

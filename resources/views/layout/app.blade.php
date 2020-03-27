@@ -26,11 +26,11 @@
                     </li>
 
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">newTodo <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="{{route('newtodo')}}">newTodo <span class="sr-only">(current)</span></a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="#">newDay</a>
+                        <a class="nav-link" href="{{route('newtodo')}}">newDay</a>
                     </li>
 
                     <li class="nav-item">
@@ -48,6 +48,22 @@
 
             </div>
         </nav>
+
+        @if (session()->has('success')) {
+            <div class="alert alert-success" role="alert">
+                <strong>{{ session()->get('success')}}</strong>
+            </div>
+        }
+        @endif
+
+        @if (session()->has('danger')) {
+            <div class="alert alert-danger" role="alert">
+                <strong>{{ session()->get('danger')}}</strong>
+            </div>
+        }
+        @endif
+
+
         @yield('content')
     </div>
 
