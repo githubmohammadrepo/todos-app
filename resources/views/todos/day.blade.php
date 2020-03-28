@@ -2,7 +2,7 @@
 
 @section('content')
     @foreach ($todos as $todo)
-<div class="card text-left mt-1" style="background-color:{{$todo->is_complete ? 'darkslateblue' :  'darkslategray'}} !important;'">
+<div class="card text-left mt-1 text-info" style="background-color:{{$todo->is_complete ? 'darkslateblue' :  'darkslategray'}} !important;'">
         <img class="card-img-top" src="holder.js/100px180/" alt="">
         <div class="card-body">
           <h4 class="card-title">
@@ -10,7 +10,7 @@
                 {{$todo->title}}
               </a>
               <span class="float-right d-flex">
-                <a href="{{route('completeTodo',$todo->id)}}" class="btn btn-sm {{$todo->is_complete ? 'bg-orange' :  'bg-primary'}}" >
+                <a href="{{route('completeTodo',$todo->id)}}" class="btn btn-sm {{$todo->is_complete ? 'bg-orange' :  'bg-primary text-light'}}" >
                     {{$todo->is_complete ? 'uncomplete' :  'complete'}}
                 </a>
                   <a href="{{route('showEditTodo',$todo->id)}}" class="btn btn-sm btn-info" >edit</a>

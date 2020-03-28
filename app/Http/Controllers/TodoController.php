@@ -170,10 +170,11 @@ class TodoController extends Controller
      */
     public function complete(Todo $todo)
     {
-        $todo->is_complete =1;
+        $todo->is_complete =!$todo->is_complete;
         $result =$todo->save();
+        $un = $todo->is_complete ? '': 'un';
         if($result){
-            session()->flash('success','your todo was successfully completed');
+            session()->flash('success','your todo was successfully '.$un.'completed');
             return redirect(route('day', explode(' ', (String)$todo->created_at)[0]));
         }else{
             session()->flash('danger','your todo does not completed');
