@@ -8,6 +8,7 @@
     <style>
         /* @stack('css') */
     </style>
+    @yield('css')
     <title>todos</title>
 </head>
 <body class="bg-dark">
@@ -40,8 +41,8 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">file operation</a>
                         <div class="dropdown-menu" aria-labelledby="dropdownId">
-                            <a class="dropdown-item" href="#">insert</a>
-                            <a class="dropdown-item" href="#">showAll</a>
+                            <a class="dropdown-item" href="{{route('posts.create')}}">new post</a>
+                            <a class="dropdown-item" href="{{route('posts.index')}}">all posts</a>
                         </div>
                     </li>
                 </ul>
@@ -68,6 +69,7 @@
     </div>
 
     <script src="/js/app.js"></script>
+    @yield('script')
     <script>
             @stack('js')
     </script>

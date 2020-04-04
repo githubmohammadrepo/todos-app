@@ -10,6 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::resource('posts', 'PostController');
 
 Route::get('/', 'TodoController@index')->name('allTodos');
 Route::get('daysTodo', 'TodoController@showDays')->name('daysTodos');

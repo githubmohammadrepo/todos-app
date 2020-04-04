@@ -1,5 +1,10 @@
 @extends('layout.app')
 
+@section('css')
+@trixassets
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/trix/1.2.1/trix.css">
+@endsection
 @section('content')
 @if ($errors->any())
     <div class="alert alert-danger">
@@ -13,7 +18,6 @@
 
 <!-- Create Post Form -->
     <div class="card text-left">
-        <img class="card-img-top" src="holder.js/100px180/" alt="">
         <div class="card-header">
             <h4 class="card-title">
                 newTodo
@@ -21,7 +25,7 @@
         </div>
         <div class="card-body">
 
-        <form action="{{route('storeTodo')}}" method="post">
+        <form action="{{route('posts.store')}}" method="POST" enctype="multipart/form-data" >
             @csrf
             <div class="form-group">
               <label for="title">Title Todo</label>
@@ -30,20 +34,33 @@
             </div>
 
             <div class="form-group">
-              <label for="description">Description Todo</label>
-              <textarea class="form-control" name="description" id="description" rows="3">{{old('description')}}</textarea>
+              <label for="description">description Todo</label>
+            <input type="text" name="description" value="{{old('description')}}" id="description" class="form-control" placeholder="description todo..." aria-describedby="description">
+            <trix-editor input="description"></trix-editor>
+              <small id="description" class="text-muted">description todo</small>
+            </div>
+            <div class="form-group">
+              <label for="image">image Todo</label>
+              <input type="file" name="image" value="{{old('image')}}" id="image" class="form-control" placeholder="image todo..." aria-describedby="image">
             </div>
 
-            <div class="form-group">
-              <label for="date">Select Date</label>
-              <input type="datetime"
-                class="form-control" name="created_at" id="date" value="{{now()}}" aria-describedby="date" placeholder="date">
-              <small id="date" class="form-text text-muted">date</small>
-            </div>
-            <button type="submit" class="btn btn-primary">save todo</button>
+
+            <button type="submit" class="btn btn-primary">save posts</button>
+
+
         </form>
         </div>
       </div>
+
+
+
+
 @endsection
 
+
+@section('script')
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/trix/1.2.1/trix-core.js"></script>
+
+@endsection
 
