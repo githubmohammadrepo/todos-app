@@ -11,7 +11,7 @@
                 {{$todo->title}}
               </a>
               <span class="float-right d-flex">
-                <a href="{{route('completeTodo',$todo->id)}}" class="btn btn-sm {{$todo->is_complete ? 'bg-orange' :  'bg-primary text-light'}}" >
+                <a href="{{route('completeTodo',$todo->id)}}" class="btn btn-sm {{$todo->is_complete ? 'bg-warning' :  'bg-primary text-light'}}" >
                     {{$todo->is_complete ? 'uncomplete' :  'complete'}}
                 </a>
                   <a href="{{route('showEditTodo',$todo->id)}}" class="btn btn-sm btn-info" >edit</a>
