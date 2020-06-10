@@ -5,10 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="/css/app.css">
-    <style>
-        /* @stack('css') */
-    </style>
-    @yield('css')
+        @stack('css')
     <title>todos</title>
 </head>
 <body class="bg-dark">
@@ -35,7 +32,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="#">remainedTodo</a>
+                        <a class="nav-link" href="{{route('remainedTodos')}}">remainedTodo</a>
                     </li>
 
                     <li class="nav-item dropdown">

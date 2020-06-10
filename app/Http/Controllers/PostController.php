@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use App\Group;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
@@ -25,7 +27,8 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('files\create');
+        return Group::all();
+        return view('files\create')->with('groups',Group::all());
     }
 
     /**
@@ -40,15 +43,18 @@ class PostController extends Controller
             'title'=> 'required|min:5|max:75',
             'description'=> 'required|min:15|max:375',
             'image' =>'required'
-            ]);
+        ]);
 
 
         $path = $request->file('image')->store('images');
 
+
+
         Post::create([
             'title'=>$request->title,
             'image'=>$path,
-            'description'=>$request->description
+            'description'=>$request->description,
+            'content',$request->content,
         ]);
         session()->flash('success','your post successfully created!');
         return redirect(route('posts.index'));

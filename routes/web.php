@@ -27,6 +27,7 @@ Route::get('todo/delete/{todo}', 'TodoController@destroy')->name('todo-delete');
 Route::get('date/{todo}', 'TodoController@day')->name('day');
 Route::get('todo/{todo}', 'TodoController@show')->name('todo');
 
+Route::get('remainedTodos','TodoController@remainedTodos')->name('remainedTodos');
 
 Route::post('newtodo/store', 'TodoController@store')->name('storeTodo');
 

@@ -17,7 +17,7 @@ class TodoController extends Controller
      */
     public function index()
     {
-        $todo = Todo::all();
+       $todo = Todo::all();
         return view('todos\index')->with('todos',$todo);
     }
 
@@ -103,8 +103,8 @@ class TodoController extends Controller
     public function store(Request $request)
     {
         $this->validate(request(),[
-            'title'=>'required|min:5|max:40',
-            'description'=>'required|min:12|max:120',
+            'title'=>'required|min:5|max:85',
+            'description'=>'required|min:12|max:420',
             'created_at'=>'required'
         ]);
 
@@ -218,5 +218,45 @@ class TodoController extends Controller
             session()->flash('danger','your todo does not deleted');
             return redirect('todo-delete');
         }
+    }
+
+
+    /**
+     * show remained todos
+     */
+    public function remainedTodos()
+    {
+        $dates =Array('$');
+         $todos = Todo::where('is_complete',0)->get();
+        foreach ($todos as $key => $todo) {
+            $array = explode(' ', (String)$todo->created_at);
+            $status = (array_search($array[0],$dates));
+                if($status>0){
+
+                }else{
+                    array_push($dates,$array[0]);
+                }
+
+        }
+
+        unset($dates[0]);
+        foreach ($dates as $key => $date) {
+            $dt = Carbon::parse($dates[$key]);
+            // echo ($dt->englishDayOfWeek).' ';
+            // echo ($dt->englishMonth).' ';
+            // echo ($dt->day).' ';
+            // echo ($dt->year).' ';
+            $dates[$key]=Array(
+                'dayofweek'=>$dt->englishDayOfWeek,
+                'month'=>$dt->englishMonth,
+                'intmonth'=>$dt->month,
+                'day'=>$dt->day,
+                'year'=>$dt->year
+            );
+
+        }
+
+        return view('todos\remainedTodos')
+        ->with('dates',$dates);
     }
 }
