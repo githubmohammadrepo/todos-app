@@ -1,11 +1,12 @@
 @extends('layout.app')
 
 @section('content')
-    @foreach ($todos as $todo)
+    @foreach ($todos as $key => $todo)
 <div class="card text-left mt-1 text-info" style="background-color:{{$todo->is_complete ? 'darkslateblue' :  'lightgoldenrodyellow '}} !important;'">
         <img class="card-img-top" src="holder.js/100px180/" alt="">
         <div class="card-body">
           <h4 class="card-title">
+              <span class="badge badge-success">{{$key+1}}</span>
               <a href="{{ route('todo',$todo->id)}}">
                 {{$todo->title}}
               </a>
