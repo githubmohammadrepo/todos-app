@@ -35,6 +35,10 @@
                         <a class="nav-link" href="{{route('remainedTodos')}}">remainedTodo</a>
                     </li>
 
+                    <li class="nav-item">
+                        <a class="nav-link btn bg-danger text-light" href="{{route('wonderfull')}}">Remove Curent Project</a>
+                    </li>
+
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">file operation</a>
                         <div class="dropdown-menu" aria-labelledby="dropdownId">

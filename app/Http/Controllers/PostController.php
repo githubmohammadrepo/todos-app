@@ -27,8 +27,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        return Group::all();
-        return view('files\create')->with('groups',Group::all());
+    return view('files\create')->with('groups',Post::all());
     }
 
     /**
